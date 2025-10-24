@@ -71,3 +71,23 @@ def atualizar_filme(id, nova_nota):
         finally:
             cursor.close()
             conexao.close()
+
+
+def deletar_filme(id):
+    conexao, cursor = conectar()
+    if conexao:
+        try:
+            cursor.execute(
+                "DELETE FROM filmes WHERE id = %s",
+                (id,)
+            )
+            conexao.commit()
+            if cursor.rowcount > 0:
+                print("Filme removido com sucesso!")
+            else:
+                print("Nenhum Filme foi encontrado com o ID fornecido.")
+        except Exception as erro:
+            print(f"Erro ao tentar inserir aluno: {erro}")
+        finally:
+            cursor.close()
+            conexao.close()
