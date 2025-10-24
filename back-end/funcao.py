@@ -56,3 +56,18 @@ def listar_filme():
         finally:
             cursor.close()
             conexao.close()
+
+def atualizar_filme(id, nova_nota):
+    conexao, cursor = conectar()
+    if conexao:
+        try:
+            cursor.execute(
+                "UPDATE filmes SET nota = %s WHERE id = %s",
+                (nova_nota, id)
+            )
+            conexao.commit()
+        except Exception as erro:
+            print(f"Erro ao tentar atualizar aluno: {erro}")
+        finally:
+            cursor.close()
+            conexao.close()
