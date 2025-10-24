@@ -35,3 +35,24 @@ def cadastrar_filme(titulo, genero, ano, nota):
         finally:
             cursor.close()
             conexao.close()
+
+def listar_filme():
+    conexao, cursor = conectar()
+    if conexao:
+        try:
+            cursor.execute(
+                "SELECT * FROM filmes ORDER BY ID"
+            )
+            filmes = cursor.fetchall()
+            if filmes:
+                for filme in filmes:
+                    id, titulo, genero, ano, nota = filme
+                    print(f"ID: {id} | Filme: {titulo} | Gênero: {genero} | Ano: {ano} | Nota: {nota}")
+            else:
+                print("Nenhum filme cadastrado ainda")        
+        except Exception as erro:
+            print(f"Erro ao tentar exbir filme: {erro}")
+            return []
+        finally:
+            cursor.close()
+            conexao.close()
