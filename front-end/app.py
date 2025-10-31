@@ -16,6 +16,10 @@ if menu == "Listar Filmes":
     response = requests.get(f"{API_URL}/filmes")
     if response.status_code == 200:
         filmes = response.json().get("filmes", [])
+        if filmes:
+            st.dataframe(filmes)
+        else:
+            st.info("Nenhum filme cadastrado ainda!")
     else:
         st.error("Erro ao conectar com a API.")
                         
