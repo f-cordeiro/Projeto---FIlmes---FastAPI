@@ -61,19 +61,19 @@ def atualizar_filme(id, nova_nota):
             )
             conexao.commit()
         except Exception as erro:
-            print(f"Erro ao tentar atualizar aluno: {erro}")
+            print(f"Erro ao tentar atualizar filme: {erro}")
         finally:
             cursor.close()
             conexao.close()
 
 
-def deletar_filme(id):
+def deletar_filme(id_filme):
     conexao, cursor = conectar()
     if conexao:
         try:
             cursor.execute(
                 "DELETE FROM filmes WHERE id = %s",
-                (id,)
+                (id_filme,)
             )
             conexao.commit()
             if cursor.rowcount > 0:
@@ -81,7 +81,22 @@ def deletar_filme(id):
             else:
                 print("Nenhum Filme foi encontrado com o ID fornecido.")
         except Exception as erro:
-            print(f"Erro ao tentar inserir aluno: {erro}")
+            print(f"Erro ao tentar inserir filmes: {erro}")
+        finally:
+            cursor.close()
+            conexao.close()
+
+def buscar_filme(id_filme):
+    conexao, cursor = conectar()
+    if conexao:
+        try:
+            cursor.execute(
+                "SELECT * FROM filmes WHERE id = %s",
+                (id_filme,)
+            )
+            return cursor.fetchone()
+        except Exception as erro:
+            print(f"Erro ao buscar o filme: {erro}")
         finally:
             cursor.close()
             conexao.close()

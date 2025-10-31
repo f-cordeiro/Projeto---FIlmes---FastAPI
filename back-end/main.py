@@ -27,3 +27,12 @@ def listar_filmes():
             }
         )
     return {"filmes": lista}
+
+@app.delete("/filmes/{id_filme}")
+def deletar_filme(id_filme:int):
+    filmes = funcao.buscar_filme(id_filme)
+    if filmes:
+        funcao.deletar_filme(id_filme)
+        return{"mensagem": "Filme excluido com sucessor"}
+    else:
+        return {"erro": "Filme não encontrado"}
