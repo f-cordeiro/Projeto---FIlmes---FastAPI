@@ -43,13 +43,7 @@ def listar_filme():
             cursor.execute(
                 "SELECT * FROM filmes ORDER BY ID"
             )
-            filmes = cursor.fetchall()
-            if filmes:
-                for filme in filmes:
-                    id, titulo, genero, ano, nota = filme
-                    print(f"ID: {id} | Filme: {titulo} | Gênero: {genero} | Ano: {ano} | Nota: {nota}")
-            else:
-                print("Nenhum filme cadastrado ainda")        
+            return cursor.fetchall()      
         except Exception as erro:
             print(f"Erro ao tentar exbir filme: {erro}")
             return []
