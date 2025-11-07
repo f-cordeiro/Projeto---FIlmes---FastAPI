@@ -36,3 +36,14 @@ def deletar_filme(id_filme:int):
         return{"mensagem": "Filme excluido com sucessor"}
     else:
         return {"erro": "Filme não encontrado"}
+    
+
+@app.put("/filmes/{id_filme}")
+def atualizar_filme(id_filme: int, nova_nota: float):
+    filme = funcao.buscar_filme(id_filme)
+
+    if filme:
+        funcao.atualizar_filme(id_filme, nova_nota)
+        return {"mensagem": "Nota do filme atualizada com sucesso!"}
+    else:
+        return {"erro": "Filme não encontrado."}
